@@ -33,7 +33,8 @@ class MessageBar extends StatelessWidget {
   final bool replying;
   final String replyingTo;
   final List<Widget> actions;
-  final TextEditingController _textController = TextEditingController();
+  TextEditingController _textController = TextEditingController();
+  final TextEditingController? textController;
   final Color replyWidgetColor;
   final Color replyIconColor;
   final Color replyCloseColor;
@@ -42,6 +43,7 @@ class MessageBar extends StatelessWidget {
   final void Function(String)? onTextChanged;
   final void Function(String)? onSend;
   final void Function()? onTapCloseReply;
+  final void Function(String)? onSendComplete;
 
   /// [MessageBar] constructor
   ///
@@ -50,6 +52,7 @@ class MessageBar extends StatelessWidget {
     this.replying = false,
     this.replyingTo = "",
     this.actions = const [],
+    this.textController,
     this.replyWidgetColor = const Color(0xffF4F4F5),
     this.replyIconColor = Colors.blue,
     this.replyCloseColor = Colors.black12,
@@ -58,12 +61,17 @@ class MessageBar extends StatelessWidget {
     this.onTextChanged,
     this.onSend,
     this.onTapCloseReply,
+    this.onSendComplete,
   });
 
   /// [MessageBar] builder method
   ///
   @override
   Widget build(BuildContext context) {
+    if(textController != null){
+      this._textController = textController!;
+    }
+
     return Align(
       alignment: Alignment.bottomCenter,
       child: Container(
@@ -169,6 +177,7 @@ class MessageBar extends StatelessWidget {
                             onSend!(_textController.text.trim());
                           }
                           _textController.text = '';
+                          onSendComplete?.call(_textController.text.trim());
                         }
                       },
                     ),
