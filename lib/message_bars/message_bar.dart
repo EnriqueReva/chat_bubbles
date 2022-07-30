@@ -173,11 +173,12 @@ class MessageBar extends StatelessWidget {
                       ),
                       onTap: () {
                         if (_textController.text.trim() != '') {
+                          final text = _textController.text.trim();
                           if (onSend != null) {
-                            onSend!(_textController.text.trim());
+                            onSend!(text);
                           }
                           _textController.text = '';
-                          onSendComplete?.call(_textController.text.trim());
+                          onSendComplete?.call(text);
                         }
                       },
                     ),
