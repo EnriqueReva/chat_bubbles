@@ -137,7 +137,7 @@ class MessageBar extends StatelessWidget {
                         maxLines: 3,
                         onChanged: onTextChanged,
                         decoration: InputDecoration(
-                          hintText: "Type your message here".i18n,
+                          hintText: "Escribe tu mensaje aquí".i18n,
                           hintMaxLines: 1,
                           contentPadding: const EdgeInsets.symmetric(
                               horizontal: 8.0, vertical: 10),
